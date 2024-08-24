@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import BlogCard from "./BlogCard";
 import { useGetAllPostsQuery } from "../../services/posts";
 import ShimmerCard from "../common/ShimmerCard";
 
 const BlogList = () => {
   const [search, setSearch] = useState("");
+
   const {
     data: postsData,
     isLoading,
@@ -31,7 +32,7 @@ const BlogList = () => {
           type="text"
           placeholder="Search for blogs by title or author"
           onChange={(e) => setSearch(e.target.value)}
-          className="px-4 py-4 outline-none border border-black text-base w-2/3 rounded-lg"
+          className="px-2 py-2 md:px-4 md:py-4 outline-none border border-black text-base w-2/3 rounded-lg"
         />
       </div>
 
