@@ -1,12 +1,11 @@
 import React from "react";
 import BlogList from "./components/blogs/BlogList";
+import Header from "./components/common/Header";
 
 function App() {
   return (
     <div className="App">
-      {/* You can include a Header component here if needed */}
       <BlogList />
-      {/* You can include a Footer component here if needed */}
     </div>
   );
 }
