@@ -26,7 +26,6 @@ const BlogDetails = () => {
       {isLoading && (
         <div className="max-w-3xl mx-auto">
           <ShimmerCard />
-          <ShimmerCard />
         </div>
       )}
 
