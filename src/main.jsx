@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import App from "./App.jsx";
 import "./index.css";
 import Layout from "./components/Layout/Layout.jsx";
+import BlogDetails from "./components/blogs/BlogDetails.jsx";
 
 const appRoutes = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const appRoutes = createBrowserRouter([
       {
         path: "/",
         element: <App />,
+      },
+      {
+        path: "/posts/:id",
+        element: <BlogDetails />,
       },
     ],
   },

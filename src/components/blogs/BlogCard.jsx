@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const BlogCard = ({ blog }) => {
   return (
@@ -6,9 +6,12 @@ const BlogCard = ({ blog }) => {
       <div className="p-6">
         <h3 className="text-2xl font-bold text-gray-800 mb-2">{blog.title}</h3>
         <p className="text-gray-600 mb-4">{blog.content}</p>
-        <a className="text-lg font-semibold text-blue-600 hover:text-blue-800">
+        <Link
+          to={`/posts/${blog._id}`}
+          className="text-lg font-semibold text-blue-600 hover:text-blue-800"
+        >
           Read More →
-        </a>
+        </Link>
       </div>
     </div>
   );
