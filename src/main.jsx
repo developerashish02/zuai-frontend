@@ -7,12 +7,17 @@ import App from "./App.jsx";
 import "./index.css";
 import Layout from "./components/Layout/Layout.jsx";
 import BlogDetails from "./components/blogs/BlogDetails.jsx";
+import LogIn from "./components/auth/SignupPage.jsx";
 
 const appRoutes = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
+      {
+        path: "/login",
+        element: <LogIn />,
+      },
       {
         path: "/",
         element: <App />,
