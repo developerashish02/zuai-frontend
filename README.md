@@ -4,6 +4,11 @@
 
 Initial API Response Time: Please note that the initial API call may take up to 50 seconds to get a response. This is due to the time it takes for the backend service to initialize.
 
+# Video Demo
+
+[![Loom Video](https://cdn.loom.com/sessions/thumbnails/67d7843632954b0bae4765700777e1ce-with-play.gif)](https://www.loom.com/share/67d7843632954b0bae4765700777e1ce?sid=596aaabd-a8ee-48c1-8f1a-d6714b942068)
+
+
 ## Overview
 
 This is a blog application that includes both a list view and a detail view for blog posts. The application is built using modern technologies and follows best industry practices.
