@@ -5,7 +5,6 @@ import { useDeletePostMutation } from "../../services/posts";
 
 const BlogCard = ({ blog }) => {
   const [deletePost, { isLoading: isDeleting }] = useDeletePostMutation();
-
   const dispatch = useDispatch();
 
   const handleEdit = (post) => {
@@ -31,10 +30,11 @@ const BlogCard = ({ blog }) => {
   return (
     <div className="flex flex-col bg-white border border-gray-200 shadow-lg rounded-lg overflow-hidden transform transition-transform hover:scale-105 duration-300 h-full">
       <div className="p-6 flex-1">
-        <h3 className="text-2xl font-bold text-gray-800 mb-2">{blog.title}</h3>
-        <p className="text-gray-600 mb-4">
-          {truncateContent(blog.content, 200)}
+        <h3 className="text-2xl font-bold  mb-2">{blog.title}</h3>
+        <p className="text-gray-700 mb-4">
+          {truncateContent(blog.content, 30)}
         </p>
+        <p className="text-gray-500 text-sm">By {blog.author}</p>
       </div>
       <div className="p-6 flex justify-between items-center">
         <Link
