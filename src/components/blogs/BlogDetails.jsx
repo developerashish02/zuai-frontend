@@ -45,7 +45,9 @@ const BlogDetails = () => {
       {isSuccess && (
         <div className="max-w-3xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
           <div className="p-6">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">{title}</h1>
+            <div className="flex justify-between items-start mb-4">
+              <h1 className="text-4xl font-bold text-gray-800">{title}</h1>
+            </div>
             <p className="text-sm text-gray-500 mb-6">
               By {author} | {formattedDate}
             </p>

@@ -1,8 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useCreatePostMutation } from "../../services/posts";
+import { useDispatch, useSelector } from "react-redux";
+import { handleCloseModal } from "../../features/posts/postsSlice";
 
-// Validation schema
 const validationSchema = Yup.object({
   title: Yup.string()
     .min(5, "Title must be at least 5 characters")
@@ -14,17 +15,19 @@ const validationSchema = Yup.object({
   author: Yup.string().required("Author is required"),
 });
 
-const PostFormModal = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
-
+const PostFormModal = () => {
   const [createPost, { isLoading, isSuccess, isError }] =
     useCreatePostMutation();
+  const isOpen = useSelector((store) => store.posts.isModalOpen);
+  const dispatch = useDispatch();
+
+  if (!isOpen) return null;
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       await createPost(values).unwrap();
       resetForm();
-      onClose();
+      dispatch(handleCloseModal());
     } catch (error) {
       console.error("Failed to create post:", error);
     } finally {
@@ -88,7 +91,7 @@ const PostFormModal = ({ isOpen, onClose }) => {
               <div className="flex justify-end">
                 <button
                   type="button"
-                  onClick={onClose}
+                  onClick={() => dispatch(handleCloseModal())}
                   className="mr-2 px-4 py-2 bg-gray-300 rounded-md focus:outline-none focus:ring focus:ring-gray-200"
                 >
                   Cancel

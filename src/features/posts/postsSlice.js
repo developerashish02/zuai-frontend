@@ -1,19 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  posts: 0,
+  isModalOpen: false,
 };
 
 export const counterSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.posts += 1;
+    handleOpenModal: (state) => {
+      state.isModalOpen = true;
+    },
+
+    handleCloseModal: (state) => {
+      state.isModalOpen = false;
     },
   },
 });
 
-export const { increment } = counterSlice.actions;
+export const { handleOpenModal, handleCloseModal } = counterSlice.actions;
 
 export default counterSlice.reducer;
