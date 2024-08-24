@@ -1,6 +1,8 @@
 import BlogCard from "./BlogCard";
 import { useGetAllPostsQuery } from "../../services/posts";
 import ShimmerCard from "../common/ShimmerCard";
+import { useDispatch } from "react-redux";
+import { setSelectedPost } from "../../features/posts/postsSlice";
 
 const BlogList = () => {
   const {
@@ -9,6 +11,8 @@ const BlogList = () => {
     isSuccess,
     error,
   } = useGetAllPostsQuery();
+
+
 
   return (
     <div className="container mx-auto px-4 py-8">

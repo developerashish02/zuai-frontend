@@ -1,6 +1,14 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { setSelectedPost } from "../../features/posts/postsSlice";
 
 const BlogCard = ({ blog }) => {
+  const dispatch = useDispatch();
+
+  const handleEdit = (post) => {
+    dispatch(setSelectedPost(post));
+  };
+
   return (
     <div className="bg-white border border-gray-200 shadow-lg rounded-lg overflow-hidden transform transition-transform hover:scale-105 duration-300">
       <div className="p-6">
@@ -15,7 +23,10 @@ const BlogCard = ({ blog }) => {
           </Link>
 
           <div className="space-x-4">
-            <button className="text-gray-500 hover:text-gray-700">
+            <button
+              className="text-gray-500 hover:text-gray-700"
+              onClick={() => handleEdit(blog)}
+            >
               <i className="fa-regular fa-pen-to-square"></i>
             </button>
             <button className="text-gray-500 hover:text-gray-700">

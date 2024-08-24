@@ -1,46 +1,76 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { useCreatePostMutation } from "../../services/posts";
+import {
+  useCreatePostMutation,
+  useUpdatePostMutation,
+} from "../../services/posts";
 import { useDispatch, useSelector } from "react-redux";
 import { handleCloseModal } from "../../features/posts/postsSlice";
+import { validationSchema } from "../../utils/validations";
 
-const validationSchema = Yup.object({
-  title: Yup.string()
-    .min(5, "Title must be at least 5 characters")
-    .max(100, "Title must not exceed 100 characters")
-    .required("Title is required"),
-  content: Yup.string()
-    .min(10, "Content must be at least 10 characters")
-    .required("Content is required"),
-  author: Yup.string().required("Author is required"),
-});
+const PostFormModal = ({ post }) => {
+  const [
+    createPost,
+    {
+      isLoading: isCreating,
+      isSuccess: isCreateSuccess,
+      isError: isCreateError,
+      reset: resetCreateMutation,
+    },
+  ] = useCreatePostMutation();
 
-const PostFormModal = () => {
-  const [createPost, { isLoading, isSuccess, isError }] =
-    useCreatePostMutation();
+  const [
+    updatePost,
+    {
+      isLoading: isUpdating,
+      isSuccess: isUpdateSuccess,
+      isError: isUpdateError,
+      reset: resetUpdateMutation,
+    },
+  ] = useUpdatePostMutation();
+
   const isOpen = useSelector((store) => store.posts.isModalOpen);
   const dispatch = useDispatch();
 
   if (!isOpen) return null;
 
+  const isEditMode = !!post;
+
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      await createPost(values).unwrap();
+      if (isEditMode) {
+        await updatePost({ id: post._id, ...values }).unwrap();
+      } else {
+        await createPost(values).unwrap();
+      }
       resetForm();
-      dispatch(handleCloseModal());
     } catch (error) {
-      console.error("Failed to create post:", error);
+      console.error(
+        `Failed to ${isEditMode ? "update" : "create"} post:`,
+        error
+      );
     } finally {
       setSubmitting(false);
     }
   };
 
+  const handleClose = () => {
+    dispatch(handleCloseModal());
+    resetCreateMutation();
+    resetUpdateMutation();
+  };
+
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
-        <h2 className="text-2xl font-bold mb-4">Create Post</h2>
+        <h2 className="text-2xl font-bold mb-4">
+          {isEditMode ? "Update Post" : "Create Post"}
+        </h2>
         <Formik
-          initialValues={{ title: "", content: "", author: "" }}
+          initialValues={{
+            title: post?.title || "",
+            content: post?.content || "",
+            author: post?.author || "",
+          }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
@@ -91,25 +121,37 @@ const PostFormModal = () => {
               <div className="flex justify-end">
                 <button
                   type="button"
-                  onClick={() => dispatch(handleCloseModal())}
+                  onClick={handleClose}
                   className="mr-2 px-4 py-2 bg-gray-300 rounded-md focus:outline-none focus:ring focus:ring-gray-200"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  disabled={isSubmitting || isLoading}
+                  disabled={isSubmitting || isCreating || isUpdating}
                   className="px-4 py-2 bg-blue-600 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-200"
                 >
-                  {isSubmitting || isLoading ? "Submitting..." : "Create Post"}
+                  {isSubmitting || isCreating || isUpdating
+                    ? "Submitting..."
+                    : isEditMode
+                    ? "Update Post"
+                    : "Create Post"}
                 </button>
               </div>
             </Form>
           )}
         </Formik>
-        {isError && <p className="text-red-600 mt-2">Failed to create post</p>}
-        {isSuccess && (
+        {isCreateError && (
+          <p className="text-red-600 mt-2">Failed to create post</p>
+        )}
+        {isUpdateError && (
+          <p className="text-red-600 mt-2">Failed to update post</p>
+        )}
+        {isCreateSuccess && (
           <p className="text-green-600 mt-2">Post created successfully</p>
+        )}
+        {isUpdateSuccess && (
+          <p className="text-green-600 mt-2">Post updated successfully</p>
         )}
       </div>
     </div>

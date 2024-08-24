@@ -24,6 +24,15 @@ export const postsApi = createApi({
       }),
       invalidatesTags: ["Post"],
     }),
+
+    updatePost: builder.mutation({
+      query: ({ id, ...updatedPost }) => ({
+        url: `/posts/${id}`,
+        method: "PUT",
+        body: updatedPost,
+      }),
+      invalidatesTags: ["Post"],
+    }),
   }),
 });
 
@@ -31,4 +40,5 @@ export const {
   useGetAllPostsQuery,
   useGetSinglePostQuery,
   useCreatePostMutation,
+  useUpdatePostMutation,
 } = postsApi;
