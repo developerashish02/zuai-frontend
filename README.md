@@ -1,8 +1,12 @@
 # Blog Application
 
+## Notes
+
+Initial API Response Time: Please note that the initial API call may take up to 50 seconds to get a response. This is due to the time it takes for the backend service to initialize.
+
 ## Overview
 
-This is a basic blog application that includes both a list view and a detail view for blog posts. The application is built using modern technologies and follows best industry practices.
+This is a blog application that includes both a list view and a detail view for blog posts. The application is built using modern technologies and follows best industry practices.
 
 ## Technologies Used
 
@@ -10,11 +14,17 @@ This is a basic blog application that includes both a list view and a detail vie
 - **Backend**: Node.js with Express
 - **API Handling**: Redux Query (RTK Query)
 - **Database**: MongoDB
-- **Deployment**: [Cloud Platform of Choice]
+- **Deployment**: [netlify , render]
 
 ## Live Demo
 
-You can view the live demo of the application at: [Your Live Demo URL]
+You can view the live demo of the application at: [https://zuai-frontend.netlify.app/]
+
+## Key Features
+
+- **List View**: Displays a list of all blog posts with pagination.
+- **Detail View**: Shows details of a selected blog post.
+- **CRUD Operations**: Create, Read, Update, and Delete operations for blog posts.
 
 ## Accessing the Code
 
