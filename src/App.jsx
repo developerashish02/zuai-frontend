@@ -1,7 +1,14 @@
-import "./App.css";
+import React from "react";
+import BlogList from "./components/blogs/BlogList";
 
-const App = () => {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
-};
+function App() {
+  return (
+    <div className="App">
+      {/* You can include a Header component here if needed */}
+      <BlogList />
+      {/* You can include a Footer component here if needed */}
+    </div>
+  );
+}
 
 export default App;
