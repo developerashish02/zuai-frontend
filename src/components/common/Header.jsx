@@ -1,27 +1,29 @@
 import { Link, NavLink } from "react-router-dom";
+import { handleOpenModal } from "../../features/posts/postsSlice";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
+  const dispatch = useDispatch();
   return (
     <header className="shadow sticky z-50 top-0">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <Link to="/" className="flex items-center">
-            <img
-              src="https://alexharkness.com/wp-content/uploads/2020/06/logo-2.png"
-              className="mr-3 h-12"
-              alt="Logo"
-            />
+            <h1 className="font-bold font-serif text-3xl">ZUAI</h1>
           </Link>
-          <div className="flex items-center lg:order-2 space-x-4">
-            <Link to="/cart" className="text-xl">
-              <span className="hover:text-gray-300">
-                <i className="fa-solid fa-cart-shopping"></i>
-              </span>
-              <span>(0)</span>
+          <div className="flex items-center lg:order-2">
+            <Link
+              to="#"
+              className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+            >
+              Log in
             </Link>
-            <button className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">
-              Login
-            </button>
+            <Link
+              onClick={() => dispatch(handleOpenModal())}
+              className="text-white bg-[#6361eb] hover:bg-blue-500 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+            >
+              Create New Post
+            </Link>
           </div>
           <div
             className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
@@ -31,49 +33,49 @@ const Header = () => {
               <li>
                 <NavLink
                   to="/"
-                  className="block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 text-gray-800 font-bold"
+                  className={({ isActive }) =>
+                    `block py-2 pr-4 pl-3 duration-200 ${
+                      isActive ? "text-orange-700" : "text-gray-700"
+                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  }
                 >
-                  All Products
+                  Home
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/electronics"
-                  className="block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 text-gray-800 font-bold"
+                  to="/about"
+                  className={({ isActive }) =>
+                    `block py-2 pr-4 pl-3 duration-200 ${
+                      isActive ? "text-orange-700" : "text-gray-700"
+                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  }
                 >
-                  Electronics
+                  About
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/jewelry"
-                  className="block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 text-gray-800 font-bold"
+                  to="/contact"
+                  className={({ isActive }) =>
+                    `block py-2 pr-4 pl-3 duration-200 ${
+                      isActive ? "text-orange-700" : "text-gray-700"
+                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  }
                 >
-                  Jewelry
+                  Contact
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/men"
-                  className="block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 text-gray-800 font-bold"
+                  to="/github"
+                  className={({ isActive }) =>
+                    `block py-2 pr-4 pl-3 duration-200 ${
+                      isActive ? "text-orange-700" : "text-gray-700"
+                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                  }
                 >
-                  Men's Clothing
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/women"
-                  className="block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 text-gray-800 font-bold"
-                >
-                  Women's Clothing
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/cart"
-                  className="block py-2 pr-4 pl-3 duration-200 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0 text-gray-800 font-bold"
-                >
-                  Cart
+                  Github
                 </NavLink>
               </li>
             </ul>

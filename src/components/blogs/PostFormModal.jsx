@@ -129,7 +129,7 @@ const PostFormModal = ({ post }) => {
                 <button
                   type="submit"
                   disabled={isSubmitting || isCreating || isUpdating}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+                  className="px-4 py-2 bg-[#6361eb] text-white rounded-md focus:outline-none focus:ring focus:ring-blue-200"
                 >
                   {isSubmitting || isCreating || isUpdating
                     ? "Submitting..."

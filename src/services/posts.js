@@ -33,6 +33,13 @@ export const postsApi = createApi({
       }),
       invalidatesTags: ["Post"],
     }),
+    deletePost: builder.mutation({
+      query: (id) => ({
+        url: `/posts/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Post"],
+    }),
   }),
 });
 
@@ -41,4 +48,5 @@ export const {
   useGetSinglePostQuery,
   useCreatePostMutation,
   useUpdatePostMutation,
+  useDeletePostMutation,
 } = postsApi;
