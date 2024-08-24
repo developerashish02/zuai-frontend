@@ -8,6 +8,8 @@ import "./index.css";
 import Layout from "./components/Layout/Layout.jsx";
 import BlogDetails from "./components/blogs/BlogDetails.jsx";
 import LogIn from "./components/auth/SignupPage.jsx";
+import SignupPage from "./components/auth/SignupPage.jsx";
+import Protected from "./components/common/Protected.jsx";
 
 const appRoutes = createBrowserRouter([
   {
@@ -16,15 +18,20 @@ const appRoutes = createBrowserRouter([
     children: [
       {
         path: "/login",
-        element: <LogIn />,
+        element: <SignupPage />,
       },
       {
-        path: "/",
-        element: <App />,
-      },
-      {
-        path: "/posts/:id",
-        element: <BlogDetails />,
+        element: <Protected />,
+        children: [
+          {
+            path: "/",
+            element: <App />,
+          },
+          {
+            path: "/posts/:id",
+            element: <BlogDetails />,
+          },
+        ],
       },
     ],
   },
