@@ -6,7 +6,7 @@ Initial API Response Time: Please note that the initial API call may take up to 
 
 # Video Demo
 
-[![Loom Video](https://cdn.loom.com/sessions/thumbnails/67d7843632954b0bae4765700777e1ce-with-play.gif)](https://www.loom.com/share/67d7843632954b0bae4765700777e1ce?sid=596aaabd-a8ee-48c1-8f1a-d6714b942068)
+video : [https://www.loom.com/share/67d7843632954b0bae4765700777e1ce?sid=596aaabd-a8ee-48c1-8f1a-d6714b942068]
 
 
 ## Overview
