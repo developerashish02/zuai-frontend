@@ -1,6 +1,6 @@
-import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useCreatePostMutation } from "../../services/posts";
 
 // Validation schema
 const validationSchema = Yup.object({
@@ -14,8 +14,23 @@ const validationSchema = Yup.object({
   author: Yup.string().required("Author is required"),
 });
 
-const PostFormModal = ({ isOpen, onClose, onSubmit }) => {
+const PostFormModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
+
+  const [createPost, { isLoading, isSuccess, isError }] =
+    useCreatePostMutation();
+
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      await createPost(values).unwrap();
+      resetForm();
+      onClose();
+    } catch (error) {
+      console.error("Failed to create post:", error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
@@ -24,7 +39,7 @@ const PostFormModal = ({ isOpen, onClose, onSubmit }) => {
         <Formik
           initialValues={{ title: "", content: "", author: "" }}
           validationSchema={validationSchema}
-          onSubmit={onSubmit}
+          onSubmit={handleSubmit}
         >
           {({ isSubmitting }) => (
             <Form>
@@ -80,15 +95,19 @@ const PostFormModal = ({ isOpen, onClose, onSubmit }) => {
                 </button>
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isLoading}
                   className="px-4 py-2 bg-blue-600 text-white rounded-md focus:outline-none focus:ring focus:ring-blue-200"
                 >
-                  {isSubmitting ? "Submitting..." : "Create Post"}
+                  {isSubmitting || isLoading ? "Submitting..." : "Create Post"}
                 </button>
               </div>
             </Form>
           )}
         </Formik>
+        {isError && <p className="text-red-600 mt-2">Failed to create post</p>}
+        {isSuccess && (
+          <p className="text-green-600 mt-2">Post created successfully</p>
+        )}
       </div>
     </div>
   );
